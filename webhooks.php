@@ -83,10 +83,10 @@ $rs=json_decode($response);
 
 //var_dump(json_decode($response, true));
 
-$msg_to_line = 'ทะเบียนรถ : '.$rs->data[0]->vehicle_name.'\n';
-$msg_to_line .=  'ตำแหน่งที่อยู่ของรถ : '.$rs->data[0]->position_name.'\n';
-//echo 'ตำแหน่งที่อยู่ของรถ2 : '.$rs->data[0]->locations[1]->location_name.'\n';
-$msg_to_line .= 'ตำแหน่งที่อยู่ของรถ2 : ';
+$msg_to_line = "ทะเบียนรถ : ".$rs->data[0]->vehicle_name."\r\n";
+$msg_to_line .=  "ตำแหน่งที่อยู่ของรถ : ".$rs->data[0]->position_name."\r\n";
+//echo "ตำแหน่งที่อยู่ของรถ2 : ".$rs->data[0]->locations[1]->location_name."\r\n";
+$msg_to_line .= "ตำแหน่งที่อยู่ของรถ2 : ";
 
 for ($x = 0; $x < count($rs->data[0]->locations); $x++) {
   if ($x == count($rs->data[0]->locations)) {
@@ -95,10 +95,10 @@ for ($x = 0; $x < count($rs->data[0]->locations); $x++) {
   $msg_to_line .= $rs->data[0]->locations[$x]->location_name.",";
 }
 
-$msg_to_line .= '\n';
-$msg_to_line .= 'ความเร็วรถ : '.$rs->data[0]->box_speed.' กม./ชม.\n';
-$msg_to_line .= 'ตำแหน่ง latitude : '.$rs->data[0]->box_latitude.'\n';
-$msg_to_line .= 'ตำแหน่ง longitude : '.$rs->data[0]->box_longitude.'\n';
+$msg_to_line .= "\r\n";
+$msg_to_line .= "ความเร็วรถ : ".$rs->data[0]->box_speed." กม./ชม.\r\n";
+$msg_to_line .= "ตำแหน่ง latitude : ".$rs->data[0]->box_latitude."\r\n";
+$msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude."\r\n";
 
 
 //echo $msg_to_line;
