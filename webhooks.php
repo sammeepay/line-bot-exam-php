@@ -101,15 +101,6 @@ $msg_to_line .= "ตำแหน่ง latitude : ".$rs->data[0]->box_latitude."
 $msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude."\r\n";
 
 
-//echo $msg_to_line;
-	
-	
-}else{
-	$msg_to_line = 'ไม่เจอ';
-}
-		
-		
-		
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
@@ -143,6 +134,15 @@ $msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude
 
 			echo $result . "\r\n";
 		}
+	
+	
+}else{
+	$msg_to_line = '';
+}
+		
+		
+		
+		
 	}
 }
 echo "OK";
