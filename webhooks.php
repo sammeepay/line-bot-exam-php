@@ -132,8 +132,7 @@ $msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude
 			$result = curl_exec($ch);
 			curl_close($ch);
 			
-			$messages = 
-			[
+			$messages = [
 				'type' => 'location',
 				'title' => $rs->data[0]->position_name,
 				'address' => "",
