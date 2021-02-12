@@ -112,6 +112,13 @@ $msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude
 			$messages = [
 				'type' => 'text',
 				'text' => $msg_to_line
+			],
+			[
+				'type' => 'location',
+				'title' => $rs->data[0]->position_name,
+				'address' => "",
+				'latitude' => $rs->data[0]->box_latitude,
+				'longitude' => $rs->data[0]->box_longitude
 			];
 
 			// Make a POST Request to Messaging API to reply to sender
