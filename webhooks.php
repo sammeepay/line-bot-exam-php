@@ -56,7 +56,7 @@ if (!is_null($events['events'])) {
 		//$userid = $arrayJson['events'][0]['source']['userId'];
 		$message = $arrayJson['events'][0]['message']['text'];
 		//รับ id ว่ามาจากไหน
-		if(isset($arrayJson['events'][0]['source']['userId']){
+		if(isset($arrayJson['events'][0]['source']['userId'])){
 			$userid = $arrayJson['events'][0]['source']['userId'];
 		}
 		if(isset($arrayJson['events'][0]['source']['groupId'])){
