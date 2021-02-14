@@ -198,7 +198,7 @@ if (strpos($msg_for_user, 'THPD') !== false) {
 		curl_close($ch);
 		$txtarray = json_decode($result, true);
 		
-		$countmember = $txtarray['memberIds'];
+		$countmember = count($txtarray['memberIds']);
 		for($x=0;$x<=$countmember;$x++){
 			$useridInGroup = $txtarray['memberIds'][$x];
 			$UserInGroupDisplayName = GetDisplayNameUser($useridInGroup);
