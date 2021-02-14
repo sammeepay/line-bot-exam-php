@@ -201,8 +201,9 @@ if (strpos($msg_for_user, 'THPD') !== false) {
 		$countmember = count($txtarray['memberIds']);
 		for($x=0;$x<=$countmember;$x++){
 			$useridInGroup = $txtarray['memberIds'][$x];
-			$UserInGroupDisplayName = GetDisplayNameUser($useridInGroup);
-			$msgtoline .= "$UserInGroupDisplayName = $useridInGroup\r\n";
+			//$UserInGroupDisplayName = GetDisplayNameUser($useridInGroup);
+			//$msgtoline .= "$UserInGroupDisplayName = $useridInGroup\r\n";
+			$msgtoline .= "$useridInGroup\r\n";
 		}
 		$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
         $arrayPostData['messages'][0]['type'] = "text";
