@@ -19,6 +19,20 @@ function replyMsg($arrayHeader,$arrayPostData){
         curl_close ($ch);
 }
 
+function GetDisplayNameUser($userId){
+	global $access_token;
+	$url = 'https://api.line.me/v2/bot/profile/'.$userId;
+	$headers = array('Authorization: Bearer ' . $access_token);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	$txtarray = json_decode($result, true);
+	return $txtarray['displayName'];
+}
+
 	$arrayHeader = array();
     $arrayHeader[] = "Content-Type: application/json";
     $arrayHeader[] = "Authorization: Bearer {$access_token}";
@@ -36,6 +50,25 @@ if (!is_null($events['events'])) {
 		
 		//Get Message for user
 		$msg_for_user = $event['message']['text'];
+		
+		//รับข้อความและชื่อแสดงจากผู้ใช้
+		$type = $arrayJson['events'][0]['source']['type'];
+		//$userid = $arrayJson['events'][0]['source']['userId'];
+		$message = $arrayJson['events'][0]['message']['text'];
+		//รับ id ว่ามาจากไหน
+		if(isset($arrayJson['events'][0]['source']['userId']){
+			$userid = $arrayJson['events'][0]['source']['userId'];
+		}
+		if(isset($arrayJson['events'][0]['source']['groupId'])){
+			$groupid = $arrayJson['events'][0]['source']['groupId'];
+		}
+		if(isset($arrayJson['events'][0]['source']['room'])){
+			$roomid = $arrayJson['events'][0]['source']['room'];
+		}
+		
+		$UserDisplayName = GetDisplayNameUser($userid);
+		
+		//strlen($value) หาความยางของข้อความ
 		
 		
 		//$text = 'THPD รถทะเบียน 66-0156 อยู่ไหน';
@@ -139,6 +172,43 @@ if (strpos($msg_for_user, 'THPD') !== false) {
         replyMsg($arrayHeader,$arrayPostData);
 	}
 
+	if (strpos($msg_for_user, 'ขอบคุณ') !== false) {
+		$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+        $arrayPostData['messages'][0]['text'] = "ไม่เป็นไรจ้า";
+        replyMsg($arrayHeader,$arrayPostData);
+	}elseif(strpos($msg_for_user, 'ขอบใจ') !== false) {
+		$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+		$arrayPostData['messages'][0]['text'] = "ไม่เป็นไรจ้า";
+        replyMsg($arrayHeader,$arrayPostData);
+	}
+	
+	if (strpos($msg_for_user, 'checkmembergroup') !== false) {
+		
+		$groupidEMS58 = 'C52b6d2b25aceb9e67b1c1d63c1dd894c'; 
+		
+		$url = 'https://api.line.me/v2/bot/group/'.$groupId.'/members/ids';
+		$headers = array('Authorization: Bearer ' . $access_token);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		$txtarray = json_decode($result, true);
+		
+		$countmember = $txtarray['memberIds'];
+		for($x=0;$x<=$countmember;$x++){
+			$useridInGroup = $txtarray['memberIds'][$x];
+			$UserInGroupDisplayName = GetDisplayNameUser($useridInGroup);
+			$msgtoline .= "$UserInGroupDisplayName = $useridInGroup\r\n";
+		}
+		$arrayPostData['replyToken'] = $arrayJson['events'][0]['replyToken'];
+        $arrayPostData['messages'][0]['type'] = "text";
+		$arrayPostData['messages'][0]['text'] = $msgtoline;
+        replyMsg($arrayHeader,$arrayPostData);
+	}
 
 /*
 
