@@ -424,9 +424,6 @@ if (strpos($msg_for_user, 'THPD') !== false) {
 	}
 
 
-	if (strpos($msg_for_user, 'ไม่รู้') !== false) {
-		
-	}
 /*
 
 //  ส่วนโค๊ดอันเก่า
