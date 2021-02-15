@@ -173,7 +173,7 @@ if (strpos($msg_for_user, 'THPD') !== false) {
 		$msg_to_line .= "ความเร็วรถ : ".$rs->data[0]->box_speed." กม./ชม.\r\n";
 		//$msg_to_line .= "ตำแหน่ง latitude : ".$rs->data[0]->box_latitude."\r\n";
 		//$msg_to_line .= "ตำแหน่ง longitude : ".$rs->data[0]->box_longitude."\r\n";
-		$msg_to_line .= "สถานะเครื่องยนต์ :  ";
+		$msg_to_line .= "สถานะเครื่องยนต์ :  \r\n";
 		
 		
 		$title = $rs->data[0]->position_name;
